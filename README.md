@@ -5,6 +5,7 @@
 ![시스템 아키텍처](https://user-images.githubusercontent.com/36130931/159920348-8610011f-4554-44fb-8152-c4f5e6d98f4e.PNG)
 
 # 사용자 정보 및 알림 그룹 정보 테이블 스키마
+![테이블스키마](https://user-images.githubusercontent.com/36130931/159920476-d6fd5f7d-f23a-4bd2-b8b1-66195f383a50.PNG)
 
 # API 명세
 ## errornoti
@@ -91,10 +92,14 @@ curl --request POST 'http://localhost:8080/v1/alert' \
 ```
 ## 시스템 동작 확인
 ### busy
+![busy_errornoti](https://user-images.githubusercontent.com/36130931/159920585-c86501a8-5992-4665-9954-56b08c941384.PNG)
+![busy_slack](https://user-images.githubusercontent.com/36130931/159920597-62eba12e-6ba6-4573-89ff-08af751405b8.PNG)
 
 ### normal
+![normal_errornoti](https://user-images.githubusercontent.com/36130931/159920646-6e4f18e5-dace-42cb-ae16-da096009b9d9.PNG)
 
 ### fail
+![fail_errornoti](https://user-images.githubusercontent.com/36130931/159920641-dbb8f7a2-2cf9-4138-a3b0-2d214bbf6700.PNG)
 
 # 추가 질문 답변
 1. 장애로 인해 외부 오픈 API 응답이 지연되거나 일시적으로 사용할 수 없는 경우, 장애 전파를 막기 위한 기능을 구현하거나 해결 방안에 대해 상세히 기술해주세요.
