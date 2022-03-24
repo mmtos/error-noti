@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  errornoti:
+    build: ./errornoti
+    environment:
+      - MOCK_SLACK_IP=slack
+      - MOCK_SLACK_PORT=8081
+      - MOCK_SLACK_TYPE=busy
+    ports:
+      - "8080:8080"
+  slack:
+    build: ./slack
+    ports:
+      - "8081:8081"
