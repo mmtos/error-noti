@@ -1,0 +1,68 @@
+<config xmlns='http://www.ehcache.org/v3'>
+    <cache alias="notiUserCache">
+        <key-type>java.lang.String</key-type>
+        <expiry>
+            <!-- ttl(time to live)과 tti(time to idle) 같이 적용하기 위해 class 지정 -->
+            <class>com.assignment.errornoti.cache.CacheExpiryPolicy</class>
+        </expiry>
+        <listeners>
+            <listener>
+                <class>com.assignment.errornoti.cache.CacheEventLogger</class>
+                <event-firing-mode>ASYNCHRONOUS</event-firing-mode>
+                <!-- 캐싱 ORDER를 파악하기위해 다음과 같이 설정. per-key 단위로 순서가 지켜짐 -->
+                <event-ordering-mode>ORDERED</event-ordering-mode>
+                <events-to-fire-on>CREATED</events-to-fire-on>
+                <events-to-fire-on>EXPIRED</events-to-fire-on>
+                <events-to-fire-on>EVICTED</events-to-fire-on>
+                <events-to-fire-on>REMOVED</events-to-fire-on>
+                <events-to-fire-on>UPDATED</events-to-fire-on>
+            </listener>
+        </listeners>
+        <resources>
+            <!-- 객체 엔트리 개수 단위 (default값이라 쓰지 않아도 됨) -->
+            <heap unit="entries">100</heap>
+            <!-- B, KB, MB 등 용량 단위 -->
+            <offheap unit="MB">100</offheap>
+        </resources>
+    </cache>
+    <cache alias="notiAllUserCache">
+        <expiry>
+            <none/>
+        </expiry>
+        <listeners>
+            <listener>
+                <class>com.assignment.errornoti.cache.CacheEventLogger</class>
+                <event-firing-mode>ASYNCHRONOUS</event-firing-mode>
+                <event-ordering-mode>ORDERED</event-ordering-mode>
+                <events-to-fire-on>CREATED</events-to-fire-on>
+                <events-to-fire-on>EXPIRED</events-to-fire-on>
+                <events-to-fire-on>EVICTED</events-to-fire-on>
+                <events-to-fire-on>REMOVED</events-to-fire-on>
+                <events-to-fire-on>UPDATED</events-to-fire-on>
+            </listener>
+        </listeners>
+        <resources>
+            <heap>1</heap>
+        </resources>
+    </cache>
+    <cache alias="notiGroupCache">
+        <expiry>
+            <class>com.assignment.errornoti.cache.CacheExpiryPolicy</class>
+        </expiry>
+        <listeners>
+            <listener>
+                <class>com.assignment.errornoti.cache.CacheEventLogger</class>
+                <event-firing-mode>ASYNCHRONOUS</event-firing-mode>
+                <event-ordering-mode>ORDERED</event-ordering-mode>
+                <events-to-fire-on>CREATED</events-to-fire-on>
+                <events-to-fire-on>EXPIRED</events-to-fire-on>
+                <events-to-fire-on>EVICTED</events-to-fire-on>
+                <events-to-fire-on>REMOVED</events-to-fire-on>
+                <events-to-fire-on>UPDATED</events-to-fire-on>
+            </listener>
+        </listeners>
+        <resources>
+            <heap>100</heap>
+        </resources>
+    </cache>
+</config>

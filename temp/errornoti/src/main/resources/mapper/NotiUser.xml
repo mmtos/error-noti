@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NotiUser">
+    <select id="selectAllUser" resultType="NotiUser">
+        SELECT NOTI_USER_ID, NOTI_USER_NAME, NOTI_USER_TOKEN, NOTI_USER_CHANNEL FROM NOTI_USER;
+    </select>
+
+    <select id="findUserByUserName" parameterType="string" resultType="NotiUser">
+        SELECT NOTI_USER_ID, NOTI_USER_NAME, NOTI_USER_TOKEN, NOTI_USER_CHANNEL FROM NOTI_USER WHERE NOTI_USER_NAME = #{value}
+    </select>
+
+    <insert id="insertNotiUser" parameterType="NotiUser">
+        INSERT INTO NOTI_USER (NOTI_USER_ID, NOTI_USER_NAME, NOTI_USER_TOKEN, NOTI_USER_CHANNEL)
+        VALUES (NOTI_USER_SEQ.NEXTVAL,#{notiUserName},'TEST_TOKEN','#errornoti')
+    </insert>
+</mapper>

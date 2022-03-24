@@ -1,0 +1,8 @@
+server:
+  port: 8081
+logging:
+  file:
+    max-history: 30
+    name: logs/postMessage.log
+  pattern:
+    rolling-file-name: ${LOG_FILE}.%d{yyyy-MM-dd}-%i.log

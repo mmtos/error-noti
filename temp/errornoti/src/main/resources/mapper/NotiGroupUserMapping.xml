@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NotiGroupUserMapping">
+    <select id="findUsersByGroupName" parameterType="string" resultType="NotiUser">
+        SELECT NOTI_USER_ID, NOTI_USER_NAME, NOTI_USER_TOKEN, NOTI_USER_CHANNEL
+        FROM NOTI_USER
+        WHERE NOTI_USER_ID IN (
+            SELECT NOTI_USER_ID
+            FROM NOTI_GROUP_USER_MAPPING
+            WHERE NOTI_GROUP_ID = (SELECT NOTI_GROUP_ID FROM NOTI_GROUP WHERE NOTI_GROUP_NAME = #{value})
+        )
+    </select>
+    <insert id="enrollUserToGroup" parameterType="NotiGroupUserMapping">
+        INSERT INTO NOTI_GROUP_USER_MAPPING (NOTI_GROUP_ID, NOTI_USER_ID)
+        VALUES (#{notiGroupId},#{notiUserId})
+    </insert>
+    <delete id="withdrawUserFromGroup" parameterType="NotiGroupUserMapping">
+        DELETE FROM NOTI_GROUP_USER_MAPPING
+        WHERE (NOTI_GROUP_ID, NOTI_USER_ID) = (#{notiGroupId},#{notiUserId})
+    </delete>
+</mapper>

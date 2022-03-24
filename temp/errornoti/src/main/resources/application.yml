@@ -1,0 +1,60 @@
+server:
+  port: 8080
+logging:
+  level:
+    com.assignment.errornoti.cache: debug
+  file:
+    max-history: 30
+    name: logs/errornoti.log
+  pattern:
+    rolling-file-name: ${LOG_FILE}.%d{yyyy-MM-dd}-%i.log
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb;MODE=Oracle;
+    username: testdb
+    password: testdb
+    initialization-mode: always
+    schema: classpath:schema-h2.sql
+  cache:
+    jcache:
+      config: classpath:ehcache.xml
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      # 전체의 20퍼센트가 실패시 circuit open
+      failureRateThreshold: 20
+      # 전체의 20퍼센트가 느린 응답시 circuit open
+      slowCallRateThreshold: 20
+      # 3초가 지나도 응답이 오지 않으면 느린 응답으로 해석
+      slowCallDurationThreshold: 3000
+      # 원격 서비스의 상태를 확인하기 위한 call의 개수
+      permittedNumberOfCallsInHalfOpenState: 1
+      # half open 상태에서 open 상태가 되기 전 최대 대기 시간
+      maxWaitDurationInHalfOpenState: 1000
+      slidingWindowType: COUNT_BASED
+      # size of record the outcome of calls when the CircuitBreaker is closed.
+      slidingWindowSize: 5
+      # circuit breaker가 동작하기 위한 최소 call 개수
+      minimumNumberOfCalls: 3
+      # 적어도 10초가 지나야 open 에서 half open으로 이동 가능
+      waitDurationInOpenState: 10000
+  instances:
+    errornoti:
+      baseConfig: default
+mybatis:
+  type-aliases-package: com.assignment.errornoti.entity
+  mapper-locations: /mapper/**/*.xml
+  executor-type: BATCH
+  configuration:
+    map-underscore-to-camel-case: true
+    vfsImpl: org.mybatis.spring.boot.autoconfigure.SpringBootVFS
+
+mockslack:
+  ip: ${MOCK_SLACK_IP}
+  port: ${MOCK_SLACK_PORT}
+  type: ${MOCK_SLACK_TYPE}
