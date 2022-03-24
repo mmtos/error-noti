@@ -2,6 +2,7 @@
 - errornoti (사용자의 알림요청을 받아 외부 알림서비스에 위임하는 메인 서비스)
 - slack (errornoti로 부터 받은 알림을 실제로 전달하는 서비스, Mocking) 
 
+![시스템 아키텍처](https://user-images.githubusercontent.com/36130931/159920348-8610011f-4554-44fb-8152-c4f5e6d98f4e.PNG)
 
 # 사용자 정보 및 알림 그룹 정보 테이블 스키마
 
